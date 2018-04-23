@@ -8,6 +8,19 @@ angular.module('lufiApp.controllers', [])
         $scope.displayMode = 'upload-mode';
         $scope.jobFinished = false;
         $scope.detectPath = '';
+        var initData = {
+            sum: 1,
+            priv: 0,
+            id: 0,
+            bank: 0,
+            ip: 0,
+            email: 0,
+            phone: 0,
+            address: 0,
+            mac: 0
+        }
+        var p_object = $('#pie-container');
+        var c_object = $('#column-container');
 
         var target = $(".upload-window")[0];
         target.addEventListener("dragenter", function () {
@@ -82,8 +95,7 @@ angular.module('lufiApp.controllers', [])
             }
             if(sum <= 209715200){
                 $scope.displayMode = 'detection-mode';
-
-                $('#process').css('display', 'block');
+                $rootScope.paintReport(p_object, c_object, initData);
 
                 // 上传文件
                 var fd = new FormData();
@@ -101,7 +113,6 @@ angular.module('lufiApp.controllers', [])
                     if(ret != null)
                         asynctask(ret);
                 }).error(function () {
-                    $('#process').css('display', 'none');
                     alert('因网络问题无法上传文件');
                 });
             }else{
@@ -123,8 +134,6 @@ angular.module('lufiApp.controllers', [])
                         var preprocess = false;
                         var intervalId = setInterval(checkAsyncTaskCompleted, 1000);
                         function checkAsyncTaskCompleted() {
-                            var p_object = $('#pie-container');
-                            var c_object = $('#column-container');
 
                             $http.get($rootScope.hostUrl + 'fetch',{
                                 params:{
@@ -133,9 +142,8 @@ angular.module('lufiApp.controllers', [])
                                 }
                             })
                                 .success(function (data) {
-                                    if(data != null && preprocess == false){
+                                    if(data != null && data.length != 0 && preprocess == false){
                                         preprocess = true;
-                                        $('#process').css('display', 'none');
                                     }
                                     if(data != null && data.flag == false)
                                         $rootScope.paintReport(p_object, c_object, data);
@@ -147,14 +155,12 @@ angular.module('lufiApp.controllers', [])
                                     }
                                 })
                                 .error(function () {
-                                    $('#process').css('display', 'none');
                                     alert('因网络原因无法获取检测数据');
                                 })
                         }
                     }
                 })
                 .error(function () {
-                    $('#process').css('display', 'none');
                     alert('因网络原因无法开始检测任务');
                 })
 
@@ -177,9 +183,13 @@ angular.module('lufiApp.controllers', [])
         }
 
         $scope.finishJob = function () {
+            var p_object = $('#pie-container');
+            var c_object = $('#column-container');
             $scope.emptyList();
             $scope.jobFinished = false;
+            $rootScope.paintReport(p_object, c_object, initData);
             $scope.displayMode = 'upload-mode';
+
         }
 
         // 绘制图表

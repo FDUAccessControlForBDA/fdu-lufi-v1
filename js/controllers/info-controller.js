@@ -47,6 +47,7 @@ angular.module('info.controllers', [])
 
     .controller('profileCtrl', function($rootScope, $scope, $http) {
         $scope.showDetail = false;
+        $scope.history = [];
 
         $http.get($rootScope.hostUrl + "getHistories", {
             params: {
@@ -55,9 +56,17 @@ angular.module('info.controllers', [])
         })
             .success(function(ret) {
                 if(ret != null && ret.code == 200){
-                    $scope.history = ret.historyList;
+                    var tmp = JSON.parse(ret.historyList);
+                    for(var i = 0; i < tmp.length; i++){
+                        var detail = JSON.parse(tmp[i].detail);
+                        $scope.history[i] = {
+                            id: tmp[i].id,
+                            date: tmp[i].date,
+                            detail: detail
+                        }
+                    }
                 } else {
-                    $scope.history = null;
+                    $scope.history = {};
                 }
             })
             .error(function() {
@@ -73,28 +82,6 @@ angular.module('info.controllers', [])
             var fileList = files.split('|');
             return fileList[0];
         }
-        // var history = [
-        //     {
-        //         id:'1',
-        //         date:'2017/03/20 13:29:00',
-        //         files: 'file name',
-        //         fileNum: '4'
-        //     },
-        //     {
-        //         id:'2',
-        //         date:'2017/03/20 13:29:00',
-        //         files: 'file name',
-        //         fileNum: '4'
-        //     },
-        //     {
-        //         id:'3',
-        //         date:'2017/03/20 13:29:00',
-        //         files: 'file name',
-        //         fileNum: '4'
-        //     }
-        // ];
-        // $scope.history = history;
-
         $scope.deleteHistory = function (index, id) {
             var confirm = confirm('确定删除历史记录？');
             if(confirm == true){
@@ -121,26 +108,11 @@ angular.module('info.controllers', [])
             }
         }
 
-        $scope.showDetailInfo = function(id){
-            $http.get($rootScope.hostUrl + "getHistory", {
-                params: {
-                    historyId: id
-                }
-            })
-                .success(function(ret) {
-                    if(ret != null && ret.code == 200){
-                        $scope.detailHistory = ret.history;
-                        var p_object = $('#p-pie-container');
-                        var c_object = $('#p-column-container');
-                        var detailData = JSON.parse($scope.detailHistory.detail);
-                        $rootScope.paintReport(p_object, c_object, detailData);
-                    } else {
-                        alert('很抱歉，因网络原因无法获取历史记录');
-                    }
-                })
-                .error(function() {
-                    alert('很抱歉，因网络原因无法获取历史记录');
-                });
+        $scope.showDetailInfo = function(index){
+            var detailData = $scope.history[index].detail;
+            var p_object = $('#p-pie-container');
+            var c_object = $('#p-column-container');
+            $rootScope.paintReport(p_object, c_object, detailData);
             $scope.showDetail = true;
         }
 

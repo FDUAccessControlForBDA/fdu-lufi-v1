@@ -5,12 +5,12 @@
         <tr class="history-list" ng-repeat="item in history track by $index">
             <td>{{$index + 1}}</td>
             <td>{{item.date}}</td>
-            <td>{{firstFile(item.files) + '等' + countFile(item.files) + '个文件'}}</td>
-            <td><a class="history-a" ng-click="showDetailInfo(item.id)">详情</a>&nbsp;&nbsp;&nbsp;
+            <td>{{firstFile(item.detail.paths) + '等' + countFile(item.detail.paths) + '个文件'}}</td>
+            <td><a class="history-a" ng-click="showDetailInfo($index)">详情</a>&nbsp;&nbsp;&nbsp;
                 <a class="history-a red" ng-click="deleteHistory($index, item.id)">删除</a></td>
         </tr>
     </table>
-    <div ng-show="showDetail">
+    <div ng-show="showDetail" style="width: 800px; margin: auto;">
         <div id="p-pie-container" style="width: 400px; height: 350px; float: left">
 
         </div>
@@ -19,8 +19,12 @@
 
         </div>
         <div>
-            <button class="btn" ng-click="download(detailHistory.path)" style=" width: 7em;margin: 0px 10px">下载报告</button>
-            <button class="btn btn-primary" ng-click="backToHistoryList()" style=" width: 7em;margin: 0px 10px">返回</button>
+            <p></p>
+            <div style="margin: auto; width: 300px;">
+                <button class="btn" ng-click="download(detailHistory.path)" style=" width: 7em;margin: 0px 10px">下载报告</button>
+                <button class="btn btn-primary" ng-click="backToHistoryList()" style=" width: 7em;margin: 0px 10px">返回</button>
+            </div>
+
         </div>
     </div>
     <div style="float: right;">
