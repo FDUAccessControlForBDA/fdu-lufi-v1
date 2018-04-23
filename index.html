@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="lufiApp">
+<head>
+    <meta charset="UTF-8">
+    <title>LUFI</title>
+
+    <link rel="stylesheet" href="lib/bootstrap-3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/info.css">
+
+
+    <script src="lib/jquery/jquery-3.1.1.js"></script>
+    <script src="lib/jquery/jquery.fileDownload.js"></script>
+    <script src="lib/highcharts.js"></script>
+    <script src="lib/angular/angular.min.js"></script>
+    <script src="lib/angular-ui-router/angular-ui-router.js"></script>
+    <script src="lib/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers/info-controller.js"></script>
+    <script src="js/controllers/login-controller.js"></script>
+    <script src="js/controllers/main-controller.js"></script>
+
+
+</head>
+<body background="light_wool_@2X.png">
+<nav class="navbar my-navbar" role="navigation" ng-controller='navCtrl'>
+    <div class="container-fluid">
+        <a href="#main" class="a-title">
+            <h1><span class="glyphicon glyphicon-cloud-upload" style="float: left; line-height: 18px;">LUFI&nbsp;</span></h1>
+        </a>
+        <div class="lufi-subtitle">
+            <div>Privacy Data Detector</div>
+            <a href="http://crypto.fudan.edu.cn/people/weili/" class="a-title">复旦大学数据分析与安全实验室</a>
+        </div>
+        <div class="lufi-nav-right">
+            <ul class="nav navbar-nav">
+                <li><a href="#law" class="a-title">法律</a></li>
+                <li><a href="#privacy" class="a-title">隐私</a></li>
+                <li><a href="#about" class="a-title">关于</a></li>
+                <li><a href="#contact" class="a-title">反馈</a></li>
+                <li ng-if="userInfo == undefined || userInfo == null"><a href="#login" class="a-title">登录</a></li>
+                <li ng-if="userInfo != null" class="dropdown">
+                    <a href="#" class="dropdown-toggle a-title" data-toggle="dropdown">
+                        个人中心
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu" id="dropdown-ul">
+                        <li><a href="#profile" class="a-title  dropmenu-a">检测记录</a></li>
+                        <li><a href="#" class="a-title dropmenu-a" ng-click="logOut()">登出</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id="main">
+    <div ui-view=""></div>
+</div>
+<footer class="modal-footer footer">Copyright © 2018 Fudan University. All Rights Reserved.</footer>
+</body>
+</html>

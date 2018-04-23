@@ -1,0 +1,50 @@
+#login-container {
+    width:610px;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:70px;
+}
+
+.inputError{
+    color: red;
+}
+.wrapper-register, .wrapper-login{
+    width: 300px;
+    margin: 20px auto;
+}
+
+.wram{
+    position: relative;
+}
+.moveCheck{
+    position: absolute;
+    top:35px;
+    left: 280px;
+    color: green;
+}
+
+.login-title {
+text-align: center;
+}
+
+#register, #login {
+    width:300px;
+}
+
+#register-confirm {
+    text-decoration: none;
+    color: gray;
+}
+
+#register-confirm:hover {
+    color: #337ab7;
+}
+
+.change-state-a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.change-state-a:hover {
+    text-decoration: none;
+}

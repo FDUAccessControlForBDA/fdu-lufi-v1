@@ -1,0 +1,29 @@
+<div id="profile-container">
+    <h3>历史检测记录</h3>
+    <table ng-show="!showDetail" class="history-container" style="text-align: center; font-size: initial;">
+        <tr class="colored"><td>编号</td><td>检测日期</td><td>文件信息</td><td>操作</td></tr>
+        <tr class="history-list" ng-repeat="item in history track by $index">
+            <td>{{$index + 1}}</td>
+            <td>{{item.date}}</td>
+            <td>{{firstFile(item.files) + '等' + countFile(item.files) + '个文件'}}</td>
+            <td><a class="history-a" ng-click="showDetailInfo(item.id)">详情</a>&nbsp;&nbsp;&nbsp;
+                <a class="history-a red" ng-click="deleteHistory($index, item.id)">删除</a></td>
+        </tr>
+    </table>
+    <div ng-show="showDetail">
+        <div id="p-pie-container" style="width: 400px; height: 350px; float: left">
+
+        </div>
+
+        <div id="p-column-container" style="width: 400px; height: 350px; float: right;">
+
+        </div>
+        <div>
+            <button class="btn" ng-click="download(detailHistory.path)" style=" width: 7em;margin: 0px 10px">下载报告</button>
+            <button class="btn btn-primary" ng-click="backToHistoryList()" style=" width: 7em;margin: 0px 10px">返回</button>
+        </div>
+    </div>
+    <div style="float: right;">
+        <a class="back-button" href="#main">&lt;&lt;返回首页</a>
+    </div>
+</div>

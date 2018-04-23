@@ -1,0 +1,50 @@
+#law-container, #privacy-container, #contact-container, #about-container, #profile-container {
+    width: 950px;
+    margin:50px auto;
+}
+
+h3 {
+    text-align: center;
+}
+
+.text-content{
+    font-size: initial;
+    text-indent:2em;
+}
+
+.back-button {
+    font-size: initial;
+}
+
+#feedback-text {
+    width: 600px;
+    height:200px;
+    resize:none;
+    vertical-align: top;
+}
+
+#feedback-form{
+    width:680px;
+    margin: auto;
+}
+
+#feedback-button {
+    width: 150px;
+    float: right;
+}
+
+.history-container {
+    width: 800px;
+    margin: 30px auto;
+    line-height:40px;
+}
+
+.history-a, .history-a:hover{
+    color: gray;
+    text-decoration: none;
+    cursor: pointer
+}
+
+.red {
+    color: red !important;
+}
