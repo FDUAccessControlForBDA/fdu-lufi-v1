@@ -4,7 +4,7 @@
     position: relative;
     margin: 0 auto;
     height: auto !important;
-    min-height: 100%;
+    overflow:auto;
 }
 .a-title{
     color: white !important;

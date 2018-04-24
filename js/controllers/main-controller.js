@@ -194,6 +194,8 @@ angular.module('lufiApp.controllers', [])
 
         // 绘制图表
         $rootScope.paintReport = function(p_object, c_object, data){
+            if(data.sum == 0)
+                data.sum = 1;
             var p_chart = {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
